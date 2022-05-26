@@ -1,0 +1,159 @@
+/*
+    Material Icons
+*/
+
+.mat-ico {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2.4rem;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    &.middle { vertical-align: middle; }
+
+    @mixin fill($map) {
+        @each $name, $fill in $map {
+            &.#{$name} {
+                @each $num in 1, 2, 3, 4, 5, 6, 7 {
+                    &-#{$num} {
+                        font-variation-settings: 'FILL' $fill, 'wght' #{$num}00;
+                    }
+                }
+            }    
+        }
+    }
+
+    $map: "filled" 1, "outlined" 0;
+    @include fill($map);
+}
+
+/*
+**
+*
+    ------------------------------------------------------------------
+    Padding e Margin
+*/
+
+$map: 8, 12, 16, 20, 24, 28, 32, 36, 40;
+$direction-map:  "top", "bottom", "left", "right";
+
+@mixin distances($atts) {
+    @each $num in $map {
+        &-#{$num} {
+            @each $att in $atts {
+                #{$att}: calc(#{$num}rem / 10);
+            }
+        }
+    }
+}
+
+// Padding
+
+._padding {
+    @include distances(padding);
+
+    &.pX {
+        @include distances((padding-left, padding-right));
+    }
+    
+    &.pY {
+        @include distances((padding-top, padding-bottom));
+    }
+    
+    @each $name in $direction-map {
+        &.p-#{$name} {
+            @include distances(padding-#{$name});
+        }
+    }
+}
+
+// Margin
+
+._margin {
+    @include distances(margin);
+
+    &.mX {
+        @include distances((margin-left, margin-right));
+    }
+    
+    &.mY {
+        @include distances((margin-top, margin-bottom));
+    }
+    
+    @each $name in $direction-map {
+        &.m-#{$name} {
+            @include distances(margin-#{$name});
+        }
+    }
+}
+
+/*
+**
+* 
+    ------------------------------------------------------------------
+    Font Size
+*/
+
+._fontMini { font-size: 1.2rem; }
+._fontDefault { font-size: 1.6rem; }
+._fontSubtitle { font-size: 2rem; }
+._fontTitle { font-size: 2.4rem; }
+
+/*
+**
+*
+    ------------------------------------------------------------------
+    Paleta de Cores
+*/
+
+$prime: #530;
+$prime-dark: #420;
+$second: #af0;
+$second-dark: #4ed;
+$light: #44e;
+
+$map:
+"prime" $prime,
+"prime-dark" $prime-dark,
+"second" $second,
+"second-dark" $second-dark,
+"light" $light,
+"white" white,
+"black" black;
+
+@mixin generateColorConfig($name, $att, $hover) {
+    ._#{$name} {
+        @each $name, $color in $map {
+            &-#{$name} {
+                @if ($hover) { &:hover { #{$att}: $color; }}
+                @else { #{$att}: $color; }
+            }
+        }
+    }
+}
+
+// background-color
+
+@include generateColorConfig("back", background-color, false);
+
+// background-color hover
+
+@include generateColorConfig("back-hover", background-color, true);
+
+// color
+
+@include generateColorConfig("color", color, false);
+
+// color hover
+
+@include generateColorConfig("color-hover", color, true);
+
+// border
+
+@include generateColorConfig("border", border-color, false);

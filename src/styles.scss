@@ -1,0 +1,47 @@
+* {
+    margin: 0; padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+}
+
+/* Desabilitar Configuração */
+
+a { text-decoration: none; }
+ul { list-style: none; }
+
+._noDisplay { display: none; }
+
+._noBreakLine { white-space: nowrap; }
+
+._noSelect, .mat-ico { 
+    -webkit-touch-callout: none;   // iPhone OS, Safari
+    -webkit-user-select: none;    // Chrome, Safari 3
+    -khtml-user-select: none;     // Safari 2
+    -moz-user-select: none;       // Firefox
+    -ms-user-select: none;        // IE10+
+    user-select: none;            // Possível implementação no futuro
+}
+
+/* Position */
+
+._relative { position: relative; }
+._absolute { position: absolute; }
+._fixed { position: fixed; }
+
+/* Display */
+
+._flex, %flex { display: flex; }
+
+._flex-auto {
+    @extend %flex;
+    flex: auto;
+}
+
+._a-center, ._flex-center {
+    @extend %flex;
+    align-items: center;
+}
+._j-center, ._flex-center {
+    @extend %flex;
+    justify-content: center;
+}
